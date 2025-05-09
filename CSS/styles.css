@@ -1,0 +1,36 @@
+*{
+  margin:0;
+  text-align: center;
+}
+
+#nav-container{
+  padding: 30px 20px;
+  display:flex;
+  justify-content: space-between;
+}
+
+#logout-btn{
+  border: 3px solid rgb(120, 13, 13);
+  border-radius: 10px;
+  padding:5px 15px;
+  text-decoration: none;
+  font-weight: bold;
+  color: rgb(116, 15, 15);
+  background-color: transparent;
+}
+#logout-btn:hover{
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 1px 1px 4px rgb(222, 14, 42);
+}
+#logout-btn:focus{
+  background-color:rgb(116, 15, 15);
+  color: white;
+}
+
+#app-title{
+  margin:30px 20px;
+  text-shadow:1px 1px 5px rgb(103, 16, 16);
+  color:rgb(173, 46, 86);
+  font-size: 2.7rem
+}
