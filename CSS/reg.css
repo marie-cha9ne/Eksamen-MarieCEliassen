@@ -35,17 +35,30 @@
 #user-name{
   border-radius: 10px;
   padding:3px 7px;
+  grid-column: 2/3;
+  grid-row: 3;
 }
 #user-name:focus{
   background-color: rgba(254, 169, 183, 0.705);
+}
+#label-name{
+  grid-column: 1/2;
+  grid-row: 3;
 }
 
 #password{
   border-radius: 10px;
   padding:3px 7px;
+  grid-column: 2/3;
+  grid-row: 4;
 }
 #password:focus{
   background-color: rgba(254, 169, 183, 0.705);
+}
+
+#passwrd-label{
+  grid-column: 1/2;
+  grid-row: 4;
 }
 
 #btn-container{
