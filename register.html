@@ -8,7 +8,20 @@
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
-  
-  <script src="./JS/register.js"></script>
+  <div id="form-parent">
+    <form id="reg-form">
+      <h2>Cupids Register</h2>
+      <p id="info-reg-txt">Create a user name and password:</p>
+      <label for="user-name">User name:</label>
+      <input type="text" id="user-name" required>
+      <label for="password">Password:</label>
+      <input type="password" id="password" required>
+      <div id="btn-container">
+      <button type="submit" id="create-btn">Create account</button>
+      <button class="login-btn">Login</button>
+      </div>
+    </form>
+   </div>
+  <script type="module" src="./JS/register.js"></script>
 </body>
 </html>
