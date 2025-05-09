@@ -1,7 +1,6 @@
 import { addNewUser } from "../Response/POST.js";
 
 const createBtn = document.getElementById("create-btn");
-const loginBtn = document.getElementById("login-btn");
 const infoRegTxt = document.getElementById("info-reg-txt");
 
 const userNameInput = document.getElementById("user-name");
