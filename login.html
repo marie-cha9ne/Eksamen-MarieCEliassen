@@ -8,7 +8,18 @@
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
-   
-  <script src="./JS/login.js"></script>
+   <div id="form-parent">
+    <form id="login-form">
+      <h2>Cupids Login</h2>
+      <p id="info-txt"></p>
+      <label for="user-name">User name:</label>
+      <input type="text" id="user-name" required>
+      <label for="password">Password:</label>
+      <input type="password" id="password" required>
+      <button type="submit">Login</button>
+      <p>Don't have an account?<a href="./register.html" id="link">Register</a></p>
+    </form>
+   </div>
+  <script type="module" src="./JS/login.js"></script>
 </body>
 </html>
