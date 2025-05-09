@@ -10,14 +10,14 @@
 <body>
    <div id="form-parent">
     <form id="login-form">
-      <h2>Cupids Login</h2>
+      <h2 id="log-title">Cupids Login</h2>
       <p id="info-txt"></p>
-      <label for="user-name">User name:</label>
+      <label for="user-name" class="name-label">User name:</label>
       <input type="text" id="user-name" required>
-      <label for="password">Password:</label>
+      <label for="password" class="passwrd-label">Password:</label>
       <input type="password" id="password" required>
-      <button type="submit">Login</button>
-      <p>Don't have an account?<a href="./register.html" id="link">Register</a></p>
+      <button type="submit" id="login-btn">Login</button>
+      <p class="reg-p">Don't have an account? <a href="./register.html" id="link">Register</a></p>
     </form>
    </div>
   <script type="module" src="./JS/login.js"></script>
