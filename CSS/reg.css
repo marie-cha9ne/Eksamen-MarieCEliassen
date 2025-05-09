@@ -1,0 +1,91 @@
+*{
+  margin: 0;
+}
+
+#form-parent{
+  margin: 200px 100px;
+  padding:25px;
+  width:fit-content;
+  border: 3px solid rgb(214, 136, 176);
+  border-radius:15px;
+  box-shadow: 1px 1px 9px rgb(176, 28, 65);
+}
+
+#reg-form{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 1em;
+}
+
+#reg-title{
+  color:rgb(183, 116, 151);
+  text-shadow: 1px 1px 4px rgb(215, 150, 176);
+  grid-column: 1/3;
+  grid-row: 1;
+  text-align: center;
+}
+
+#info-reg-txt{
+  grid-column: 1/3;
+  grid-row: 2;
+  font-weight: bold;
+}
+
+#user-name{
+  border-radius: 10px;
+  padding:3px 7px;
+}
+#user-name:focus{
+  background-color: rgba(254, 169, 183, 0.705);
+}
+
+#password{
+  border-radius: 10px;
+  padding:3px 7px;
+}
+#password:focus{
+  background-color: rgba(254, 169, 183, 0.705);
+}
+
+#btn-container{
+  grid-column: 1/3;
+  display: flex;
+  justify-content: space-around;
+}
+
+#create-btn{
+  border:4px solid rgb(248, 147, 164);
+  border-radius: 10px;
+  background-color: transparent;
+  padding:3px 9px;
+  color:rgb(120, 51, 62);
+  font-weight: bold;
+}
+#create-btn:hover{
+  box-shadow: 1px 1px 5px rgb(253, 129, 149);
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+#create-btn:focus{
+  background-color: rgb(248, 147, 164);
+  color:whitesmoke;
+}
+
+.login-btn{
+  border:4px solid rgb(139, 17, 17);
+  border-radius: 10px;
+  background-color: transparent;
+  padding:3px 20px;
+  color: rgb(96, 13, 13);
+  font-weight: bold;
+}
+.login-btn:hover{
+  box-shadow: 1px 1px 5px rgb(139, 17, 17);
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.login-btn:active{
+  background-color: rgb(139, 17, 17);
+  color:white
+}

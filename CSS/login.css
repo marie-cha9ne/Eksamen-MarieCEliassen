@@ -30,6 +30,7 @@
   grid-column: 2/3;
   grid-row: 2;
   border-radius: 10px;
+  padding:3px 7px;
 }
 #user-name:focus{
   background-color: rgba(222, 79, 79, 0.452);
@@ -43,6 +44,7 @@
   grid-column: 2/3;
   grid-row: 3;
   border-radius: 10px;
+  padding:3px 7px;
 }
 #password:focus{
   background-color: rgba(222, 79, 79, 0.452);
