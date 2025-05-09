@@ -90,7 +90,6 @@
   border-radius: 10px;
   background-color: transparent;
   padding:3px 20px;
-  color: rgb(96, 13, 13);
   font-weight: bold;
 }
 .login-btn:hover{
@@ -100,5 +99,12 @@
 }
 .login-btn:active{
   background-color: rgb(139, 17, 17);
-  color:white
+}
+
+#login-link{
+  text-decoration: none;
+  color:rgb(96, 13, 13);
+}
+#login-link:active{
+  color:white;
 }
