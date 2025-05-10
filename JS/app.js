@@ -1,4 +1,6 @@
 import { updateUserEdits } from "../Response/PUT.js";
+import { getRandomUsers } from "../Response/GET.js";
+import { randomUserUrl } from "../Response/Auth.js";
 
  const userInfo = document.getElementById("user-info");
 
@@ -16,7 +18,6 @@ import { updateUserEdits } from "../Response/PUT.js";
 
     displayUserEdits(user);
   }
-  
 }
 
 showUserInfo()
@@ -121,4 +122,29 @@ function displayUserEdits(user){
      });
 
    userInfo.append(nameTag, ageTag, genTag, editBtn);
+}
+
+export async function showRandomUser(users){
+  const matchContainer = document.getElementById("match-container");
+  matchContainer.innerHTML="";
+
+  users.forEach((user)=>{
+    const cardDiv = document.createElement("div");
+    cardDiv.classList.add("card-div");
+
+    const profilePic = document.createElement("img")
+    profilePic.src=`${user.picture.medium}`;
+
+    const matchName = document.createElement("h2");
+    matchName.textContent=`${user.name.first} ${user.name.last}`
+
+    const matchGender = document.createElement("p");
+    matchGender.textContent=`Gender: ${user.gender}`;
+
+    const matchAge = document.createElement("p");
+    matchAge.textContent=`${user.dob.age}`;
+
+    cardDiv.append(profilePic, matchName, matchGender, matchAge);
+    matchContainer.appendChild(cardDiv);
+  })
 }
