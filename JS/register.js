@@ -15,8 +15,11 @@ async function regNewUser(){
     password: passwrd
   }
 
-  await addNewUser(newUser);
+  const savedUser = await addNewUser(newUser);
 
+  if(savedUser){
+    sessionStorage.setItem("userLoggedin", JSON.stringify(savedUser));
+  }
   userNameInput.value="";
   passwordInput.value="";
 }
