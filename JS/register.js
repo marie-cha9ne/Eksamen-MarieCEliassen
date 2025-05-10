@@ -1,4 +1,4 @@
-import { addNewUser } from "../Response/POST.js";
+import { addNewUser } from "../Response/POST-users.js";
 
 const createBtn = document.getElementById("create-btn");
 const infoRegTxt = document.getElementById("info-reg-txt");

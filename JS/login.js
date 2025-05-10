@@ -1,4 +1,4 @@
-import { getUsers } from "../Response/GET.js";
+import { getUsers } from "../Response/GET-users.js";
 
 const loginBtn = document.getElementById("login-btn");
 const userName = document.getElementById("user-name");

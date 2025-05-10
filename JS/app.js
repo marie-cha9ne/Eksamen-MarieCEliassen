@@ -1,15 +1,14 @@
 import { updateUserEdits } from "../Response/PUT.js";
-import { getRandomUsers } from "../Response/GET.js";
-import { randomUserUrl } from "../Response/Auth.js";
 
- const userInfo = document.getElementById("user-info");
 
-  function showUserInfo(){
+const userInfo = document.getElementById("user-info");
+
+function showUserInfo() {
   const userData = sessionStorage.getItem("userLoggedin");
 
-  if(userData){
+  if (userData) {
     const user = JSON.parse(userData);
-    userInfo.innerHTML="";
+    userInfo.innerHTML = "";
 
     const displayName = document.createElement("p");
     displayName.textContent = `Logged in as: ${user.name}`;
@@ -20,131 +19,183 @@ import { randomUserUrl } from "../Response/Auth.js";
   }
 }
 
-showUserInfo()
+showUserInfo();
 
-async function editUserInfo(user){
-userInfo.innerHTML="";
+async function editUserInfo(user) {
+  userInfo.innerHTML = "";
 
-const nameLabel = document.createElement("label");
-nameLabel.textContent="Edit user name:";
+  const nameLabel = document.createElement("label");
+  nameLabel.textContent = "Edit user name:";
 
-const nameInput = document.createElement("input");
-nameInput.value= user.name;
+  const nameInput = document.createElement("input");
+  nameInput.value = user.name;
 
-// tilleggsfunksjonalitet?
-const ageLabel = document.createElement("label")
-ageLabel.textContent="Select you age:";
-const ageEdit  = document.createElement("select");
+  // tilleggsfunksjonalitet?
+  const ageLabel = document.createElement("label");
+  ageLabel.textContent = "Select you age:";
+  const ageEdit = document.createElement("select");
 
-for (let i = 18; i <=  80; i++){
-  const ageOpt = document.createElement("option");
-  ageOpt.value = i;
-  ageOpt.textContent= i;
+  for (let i = 18; i <= 80; i++) {
+    const ageOpt = document.createElement("option");
+    ageOpt.value = i;
+    ageOpt.textContent = i;
 
-  ageEdit.appendChild(ageOpt);
-}
-
-if(user.age){
-  ageEdit.value = user.age;
-}
-
-const genLabel = document.createElement("label");
-genLabel.textContent="Choose a gender:";
-
-const genSelect = document.createElement("select");
-
-const femaleOpt = document.createElement("option");
-femaleOpt.value="Female";
-femaleOpt.textContent="Female";
-
-const maleOpt = document.createElement("option");
-maleOpt.value="Male";
-maleOpt.textContent="Male";
-
-const passLabel = document.createElement("label");
-passLabel.textContent="Change password:"
-
-const editPasswrd = document.createElement("input");
-editPasswrd.value = user.password;
-
-userInfo.style.display="flex";
-userInfo.style.flexDirection="column";
-userInfo.style.gap="5px";
-
-const saveBtn = document.createElement("button");
-saveBtn.classList.add("save-btn");
-saveBtn.textContent="Save";
-
-saveBtn.addEventListener("click", async ()=>{
-  const updatedUser = {
-    name: nameInput.value,
-    age: ageEdit.value,
-    gender: genSelect.value,
-    password: editPasswrd.value,
+    ageEdit.appendChild(ageOpt);
   }
 
-  await updateUserEdits(user._id, updatedUser)
+  if (user.age) {
+    ageEdit.value = user.age;
+  }
 
-  updatedUser._id = user._id;
-  sessionStorage.setItem("userLoggedin", JSON.stringify(updatedUser));
+  const genLabel = document.createElement("label");
+  genLabel.textContent = "Choose a gender:";
 
-  showUserInfo()
-})
+  const genSelect = document.createElement("select");
 
-genSelect.append(femaleOpt, maleOpt)
-userInfo.append(nameLabel, nameInput, ageLabel, ageEdit, genLabel, genSelect, passLabel, editPasswrd, saveBtn);
+  const femaleOpt = document.createElement("option");
+  femaleOpt.value = "Female";
+  femaleOpt.textContent = "Female";
+
+  const maleOpt = document.createElement("option");
+  maleOpt.value = "Male";
+  maleOpt.textContent = "Male";
+
+  const passLabel = document.createElement("label");
+  passLabel.textContent = "Change password:";
+
+  const editPasswrd = document.createElement("input");
+  editPasswrd.value = user.password;
+
+  userInfo.style.display = "flex";
+  userInfo.style.flexDirection = "column";
+  userInfo.style.gap = "5px";
+
+  const saveBtn = document.createElement("button");
+  saveBtn.classList.add("save-btn");
+  saveBtn.textContent = "Save";
+
+  saveBtn.addEventListener("click", async () => {
+    const updatedUser = {
+      name: nameInput.value,
+      age: ageEdit.value,
+      gender: genSelect.value,
+      password: editPasswrd.value,
+    };
+
+    await updateUserEdits(user._id, updatedUser);
+
+    updatedUser._id = user._id;
+    sessionStorage.setItem("userLoggedin", JSON.stringify(updatedUser));
+
+    showUserInfo();
+  });
+
+  genSelect.append(femaleOpt, maleOpt);
+  userInfo.append(
+    nameLabel,
+    nameInput,
+    ageLabel,
+    ageEdit,
+    genLabel,
+    genSelect,
+    passLabel,
+    editPasswrd,
+    saveBtn
+  );
 }
 
-function displayUserEdits(user){
-  userInfo.innerHTML="";
+function displayUserEdits(user) {
+  userInfo.innerHTML = "";
 
-  if(user.gender === "Female"){
-    userInfo.style.border="5px solid pink";
-  }else if(user.gender === "Male"){
-    userInfo.style.border="5px solid darkBlue";
+  if (user.gender === "Female") {
+    userInfo.style.border = "5px solid pink";
+  } else if (user.gender === "Male") {
+    userInfo.style.border = "5px solid darkBlue";
   }
 
   const nameTag = document.createElement("p");
-  nameTag.textContent=`Name: ${user.name}`;
+  nameTag.textContent = `Name: ${user.name}`;
 
   const ageTag = document.createElement("p");
-  ageTag.textContent=`Age: ${user.age || ""}`;
+  ageTag.textContent = `Age: ${user.age || ""}`;
 
   const genTag = document.createElement("p");
-  genTag.textContent=`Gender: ${user.gender || ""}`;
+  genTag.textContent = `Gender: ${user.gender || ""}`;
 
   const editBtn = document.createElement("button");
   editBtn.classList.add("edit-btn");
   editBtn.textContent = "Edit profile";
 
-    editBtn.addEventListener("click", ()=>{
+  editBtn.addEventListener("click", () => {
     editUserInfo(user);
-     });
+  });
 
-   userInfo.append(nameTag, ageTag, genTag, editBtn);
+  userInfo.append(nameTag, ageTag, genTag, editBtn);
 }
 
-export async function showRandomUser(users){
+let currentCard = 0;
+
+export async function showRandomUser(userList) {
   const matchContainer = document.getElementById("match-container");
-  matchContainer.innerHTML="";
+  matchContainer.innerHTML = "";
 
-  users.forEach((user)=>{
-    const cardDiv = document.createElement("div");
-    cardDiv.classList.add("card-div");
+  const user = userList[currentCard];
 
-    const profilePic = document.createElement("img")
-    profilePic.src=`${user.picture.medium}`;
+  const cardDiv = document.createElement("div");
+  cardDiv.classList.add("card-div");
 
-    const matchName = document.createElement("h2");
-    matchName.textContent=`${user.name.first} ${user.name.last}`
+  const profilePic = document.createElement("img");
+  profilePic.src = `${user.picture.medium}`;
 
-    const matchGender = document.createElement("p");
-    matchGender.textContent=`Gender: ${user.gender}`;
+  const matchName = document.createElement("h2");
+  matchName.textContent = `${user.name.first} ${user.name.last}`;
 
-    const matchAge = document.createElement("p");
-    matchAge.textContent=`${user.dob.age}`;
+  const matchGender = document.createElement("p");
+  matchGender.textContent = `Gender: ${user.gender}`;
 
-    cardDiv.append(profilePic, matchName, matchGender, matchAge);
-    matchContainer.appendChild(cardDiv);
-  })
+  const matchAge = document.createElement("p");
+  matchAge.textContent = `Age:${user.dob.age}`;
+
+  const matchCity = document.createElement("p");
+  matchCity.textContent=`${user.location.city}, ${user.location.state}, ${user.location.country}`;
+
+  const likeBtn = createLikeBtn(userList, matchContainer);
+  const dislikeBtn = createDislikeBtn(userList, matchContainer)
+
+  cardDiv.append(profilePic, matchName, matchGender, matchAge, matchCity, likeBtn, dislikeBtn);
+  matchContainer.appendChild(cardDiv);
+}
+
+function createLikeBtn(userList, matchContainer){
+  const btn = document.createElement("button");
+  btn.classList.add("like-btn");
+  btn.textContent="Yes ❤️";
+
+  btn.addEventListener("click", ()=>{
+    currentCard++;
+
+    if(currentCard < userList.length){
+      showRandomUser(userList);
+    }else{
+      matchContainer.innerHTML="<p>No more matches Available</p>";
+    }
+  });
+  return btn;
+}
+
+function createDislikeBtn(userList, matchContainer){
+  const disBtn = document.createElement("button");
+  disBtn.classList.add("dislike-btn");
+  disBtn.textContent="No 💔";
+
+  disBtn.addEventListener("click", ()=>{
+    currentCard++;
+
+    if(currentCard < userList.length){
+      showRandomUser(userList);
+    }else{
+      matchContainer.innerHTML="<p>No more matches Available</p>";
+    }
+  });
+  return disBtn;
 }
