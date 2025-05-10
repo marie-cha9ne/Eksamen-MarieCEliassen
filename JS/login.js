@@ -18,6 +18,7 @@ const foundUsers = users.find(
 );
 
 if(foundUsers){
+  sessionStorage.setItem("userLoggedin", JSON.stringify(foundUsers));
   alert(`Welcome ${foundUsers.name}, you are now logged in!`);
 
   setTimeout(()=>{
