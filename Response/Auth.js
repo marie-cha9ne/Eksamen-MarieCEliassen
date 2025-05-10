@@ -3,5 +3,5 @@
 // legger inn results=20 for å ikke overbelaste crudcrud for fort
 export const AllUserUrl =`https://randomuser.me/api/?results=20`;
 
-const crudKey = "88e578c921134dc5b1604469ddea775e";
+const crudKey = "e89594bd77314cf3bdb3bba3f5e1fc86";
 export const crudCrudUrl=`https://crudcrud.com/api/${crudKey}/users`;

@@ -12,15 +12,11 @@ import { updateUserEdits } from "../Response/PUT.js";
     const displayName = document.createElement("p");
     displayName.textContent = `Logged in as: ${user.name}`;
 
-    const editBtn = document.createElement("button")
-    editBtn.textContent = "Edit profile";
+    userInfo.append(displayName);
 
-    editBtn.addEventListener("click", ()=>{
-    editUserInfo(user);
-     });
-
-    userInfo.append(displayName, editBtn);
+    displayUserEdits(user);
   }
+  
 }
 
 showUserInfo()
@@ -29,7 +25,7 @@ async function editUserInfo(user){
 userInfo.innerHTML="";
 
 const nameLabel = document.createElement("label");
-nameLabel.textContent="Edit user name";
+nameLabel.textContent="Edit user name:";
 
 const nameInput = document.createElement("input");
 nameInput.value= user.name;
@@ -64,14 +60,26 @@ const maleOpt = document.createElement("option");
 maleOpt.value="Male";
 maleOpt.textContent="Male";
 
+const passLabel = document.createElement("label");
+passLabel.textContent="Change password:"
+
+const editPasswrd = document.createElement("input");
+editPasswrd.value = user.password;
+
+userInfo.style.display="flex";
+userInfo.style.flexDirection="column";
+userInfo.style.gap="5px";
+
 const saveBtn = document.createElement("button");
+saveBtn.classList.add("save-btn");
 saveBtn.textContent="Save";
 
 saveBtn.addEventListener("click", async ()=>{
   const updatedUser = {
     name: nameInput.value,
     age: ageEdit.value,
-    gender: genSelect.value
+    gender: genSelect.value,
+    password: editPasswrd.value,
   }
 
   await updateUserEdits(user._id, updatedUser)
@@ -83,5 +91,34 @@ saveBtn.addEventListener("click", async ()=>{
 })
 
 genSelect.append(femaleOpt, maleOpt)
-userInfo.append(nameLabel, nameInput, ageLabel, ageEdit, genLabel, genSelect, saveBtn);
+userInfo.append(nameLabel, nameInput, ageLabel, ageEdit, genLabel, genSelect, passLabel, editPasswrd, saveBtn);
+}
+
+function displayUserEdits(user){
+  userInfo.innerHTML="";
+
+  if(user.gender === "Female"){
+    userInfo.style.border="5px solid pink";
+  }else if(user.gender === "Male"){
+    userInfo.style.border="5px solid darkBlue";
+  }
+
+  const nameTag = document.createElement("p");
+  nameTag.textContent=`Name: ${user.name}`;
+
+  const ageTag = document.createElement("p");
+  ageTag.textContent=`Age: ${user.age || ""}`;
+
+  const genTag = document.createElement("p");
+  genTag.textContent=`Gender: ${user.gender || ""}`;
+
+  const editBtn = document.createElement("button");
+  editBtn.classList.add("edit-btn");
+  editBtn.textContent = "Edit profile";
+
+    editBtn.addEventListener("click", ()=>{
+    editUserInfo(user);
+     });
+
+   userInfo.append(nameTag, ageTag, genTag, editBtn);
 }
