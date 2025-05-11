@@ -1,5 +1,5 @@
 import { updateUserEdits } from "../Response/PUT.js";
-
+import { allUsers } from "../Response/GET-matches.js";
 
 const userInfo = document.getElementById("user-info");
 
@@ -204,4 +204,43 @@ function createDislikeBtn(userList, matchContainer){
     }
   });
   return disBtn;
+}
+
+function genderFilter(users, gender){
+  return users.filter(user => user.gender === gender);
+}
+
+document.getElementById("filter-females").addEventListener("click", ()=> {
+  const filteredFe = genderFilter(allUsers, "female");
+  currentCard = 0;
+  sessionStorage.setItem("genderFilter", "female");
+  showRandomUser(filteredFe);
+});
+
+document.getElementById("filter-males").addEventListener("click", ()=>{
+  const filteredMa = genderFilter(allUsers, "male");
+  currentCard = 0;
+  sessionStorage.setItem("genderFilter", "male");
+  showRandomUser(filteredMa);
+});
+
+// TillegsFuksjonalitet. tilbake til default -> viser begge kjønn
+document.getElementById("filter-all").addEventListener("click", ()=>{
+  currentCard = 0;
+  sessionStorage.removeItem("genderFilter");
+  showRandomUser(allUsers);
+});
+
+export function saveGenFilter(){
+  const genFilter = sessionStorage.getItem("genderFilter");
+
+  if(genFilter === "female"){
+    const filteredFe = genderFilter(allUsers, "female");
+    showRandomUser(filteredFe);
+  }else if(genFilter === "male"){
+    const filteredMa = genderFilter(allUsers, "male");
+    showRandomUser(filteredMa);
+  }else{
+    showRandomUser(allUsers)
+  }
 }
