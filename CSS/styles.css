@@ -63,3 +63,39 @@
   color:rgb(173, 46, 86);
   font-size: 2.7rem
 }
+#match-container{
+  display: flex;
+  justify-content: center;
+}
+
+.card-div{
+  border-radius: 10px;
+  width: fit-content;
+  padding: 30px 30px;
+}
+
+.like-btn{
+  margin:10px 15px 0px 0px;
+  background-color: transparent;
+  padding:5px 10px;
+  font-weight: bold;
+  border:2px solid rgb(91, 154, 91);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.like-btn:hover{
+  box-shadow: 1px 1px 5px green;
+}
+
+.dislike-btn{
+  margin:10px 0px 0px 15px;
+  background-color: transparent;
+  padding:5px 10px;
+  font-weight: bold;
+  border:2px solid rgb(154, 91, 91);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.dislike-btn:hover{
+  box-shadow: 1px 1px 5px rgb(220, 18, 18);
+}

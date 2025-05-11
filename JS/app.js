@@ -153,6 +153,12 @@ export async function showRandomUser(userList) {
   const matchGender = document.createElement("p");
   matchGender.textContent = `Gender: ${user.gender}`;
 
+  if(user.gender == "female"){
+    cardDiv.style.border="5px solid pink";
+  }else{
+    cardDiv.style.border="5px solid darkBlue";
+  }
+
   const matchAge = document.createElement("p");
   matchAge.textContent = `Age:${user.dob.age}`;
 
