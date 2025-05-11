@@ -139,6 +139,10 @@ export async function showRandomUser(userList) {
   const matchContainer = document.getElementById("match-container");
   matchContainer.innerHTML = "";
 
+  if(!userList.length){
+    matchContainer.innerHTML="<p>No matches found for that age, edit filters and try again.</p>"
+    return;
+  }
   const user = userList[currentCard];
 
   const cardDiv = document.createElement("div");
@@ -231,16 +235,55 @@ document.getElementById("filter-all").addEventListener("click", ()=>{
   showRandomUser(allUsers);
 });
 
-export function saveGenFilter(){
-  const genFilter = sessionStorage.getItem("genderFilter");
+function ageFilter(users, minAge, maxAge){
+  return users.filter(user => {
+    const age = user.dob.age;
+    return age >= minAge && age <= maxAge;
+  });
+}
 
-  if(genFilter === "female"){
-    const filteredFe = genderFilter(allUsers, "female");
-    showRandomUser(filteredFe);
-  }else if(genFilter === "male"){
-    const filteredMa = genderFilter(allUsers, "male");
-    showRandomUser(filteredMa);
-  }else{
-    showRandomUser(allUsers)
+export function addSavedFilter(){
+  const gender = sessionStorage.getItem("genderFilter");
+  const minAge = parseInt(sessionStorage.getItem("minAge")) || 18;
+  const maxAge = parseInt(sessionStorage.getItem("maxAge")) || 80;
+
+  let filtered = allUsers;
+
+  if(gender){
+    filtered = genderFilter(filtered, gender);
+  }
+
+  filtered = ageFilter(filtered, minAge, maxAge);
+
+  currentCard = 0;
+  showRandomUser(filtered)
+}
+
+document.getElementById("add-btn").addEventListener("click", ()=>{
+  const minAge = parseInt(document.getElementById("min-age").value);
+  const maxAge = parseInt(document.getElementById("max-age").value);
+
+  if(minAge > maxAge){
+    alert("Minimum age cannot be higher than maximum age.");
+    return;
+  }
+
+  sessionStorage.setItem("minAge", minAge);
+  sessionStorage.setItem("maxAge", maxAge);
+
+  addSavedFilter();
+});
+
+// funksjon for å vise lagrede filtrerings valg fra sessionStorage i inputfeltene på siden.
+export function updateAgeFilterInStorage(){
+  const minAge = sessionStorage.getItem("minAge");
+  const maxAge = sessionStorage.getItem("maxAge");
+
+  if(minAge){
+    document.getElementById("min-age").value = minAge;
+  }
+
+  if(maxAge){
+    document.getElementById("max-age").value = maxAge;
   }
 }
