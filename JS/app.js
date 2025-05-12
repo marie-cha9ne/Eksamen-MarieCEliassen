@@ -1,5 +1,5 @@
 import { updateUserEdits } from "../Response/PUT.js";
-import { allUsers } from "../Response/GET-matches.js";
+import { allUsers, getRandomUsers } from "../Response/GET-matches.js";
 
 const userInfo = document.getElementById("user-info");
 
@@ -133,7 +133,7 @@ function displayUserEdits(user) {
   userInfo.append(nameTag, ageTag, genTag, editBtn);
 }
 
-let currentCard = 0;
+
 
 export async function showRandomUser(userList) {
   const matchContainer = document.getElementById("match-container");
@@ -143,7 +143,11 @@ export async function showRandomUser(userList) {
     matchContainer.innerHTML="<p>No matches found for that age, edit filters and try again.</p>"
     return;
   }
-  const user = userList[currentCard];
+
+  let currentIndex = parseInt(sessionStorage.getItem("currentCard"), 10);
+  if (isNaN(currentIndex) || currentIndex < 0 ) currentIndex = 0;
+
+  let user = userList[currentIndex];
 
   const cardDiv = document.createElement("div");
   cardDiv.classList.add("card-div");
@@ -176,39 +180,53 @@ export async function showRandomUser(userList) {
   matchContainer.appendChild(cardDiv);
 }
 
-function createLikeBtn(userList, matchContainer){
+function createLikeBtn(userList){
   const btn = document.createElement("button");
   btn.classList.add("like-btn");
   btn.textContent="Yes ❤️";
 
   btn.addEventListener("click", ()=>{
-    currentCard++;
-
-    if(currentCard < userList.length){
-      showRandomUser(userList);
-    }else{
-      matchContainer.innerHTML="<p>No more matches Available</p>";
-    }
+    nextCard(userList);
   });
   return btn;
 }
 
-function createDislikeBtn(userList, matchContainer){
+function createDislikeBtn(userList){
   const disBtn = document.createElement("button");
   disBtn.classList.add("dislike-btn");
   disBtn.textContent="No 💔";
 
   disBtn.addEventListener("click", ()=>{
-    currentCard++;
-
-    if(currentCard < userList.length){
-      showRandomUser(userList);
-    }else{
-      matchContainer.innerHTML="<p>No more matches Available</p>";
-    }
+    nextCard(userList)
   });
   return disBtn;
 }
+
+function nextCard(userList){
+  let currentIndex = parseInt(sessionStorage.getItem("currentCard"), 10) || 0;
+
+  currentIndex++;
+
+  if(currentIndex >= userList.length){
+       matchContainer.innerHTML="<p>No more matches Available</p>";
+
+      // lager knapp for å laste nye brukere
+      const loadMoreBtn = document.createElement("button");
+      loadMoreBtn.textContent = "Load more matches";
+
+      loadMoreBtn.addEventListener("click", async ()=>{
+       await getRandomUsers();
+       const newMatces = JSON.parse(sessionStorage.getItem("matches"));
+       sessionStorage.setItem("currentCard", 0);
+       showRandomUser(newMatces);
+      });
+      matchContainer.appendChild(loadMoreBtn);
+      return;
+  }
+  sessionStorage.setItem("currentCard", currentIndex.toString());
+  showRandomUser(userList)
+}
+
 
 function genderFilter(users, gender){
   return users.filter(user => user.gender === gender);
@@ -216,22 +234,25 @@ function genderFilter(users, gender){
 
 document.getElementById("filter-females").addEventListener("click", ()=> {
   const filteredFe = genderFilter(allUsers, "female");
-  currentCard = 0;
   sessionStorage.setItem("genderFilter", "female");
+  sessionStorage.setItem("currentCard", 0);
+
   showRandomUser(filteredFe);
 });
 
 document.getElementById("filter-males").addEventListener("click", ()=>{
   const filteredMa = genderFilter(allUsers, "male");
-  currentCard = 0;
   sessionStorage.setItem("genderFilter", "male");
+   sessionStorage.setItem("currentCard", 0);
+
   showRandomUser(filteredMa);
 });
 
 // TillegsFuksjonalitet. tilbake til default -> viser begge kjønn
 document.getElementById("filter-all").addEventListener("click", ()=>{
-  currentCard = 0;
   sessionStorage.removeItem("genderFilter");
+   sessionStorage.setItem("currentCard", 0);
+
   showRandomUser(allUsers);
 });
 
@@ -255,7 +276,7 @@ export function addSavedFilter(){
 
   filtered = ageFilter(filtered, minAge, maxAge);
 
-  currentCard = 0;
+  // sessionStorage.setItem("currentCard", 0);
   showRandomUser(filtered)
 }
 
@@ -270,7 +291,7 @@ document.getElementById("add-btn").addEventListener("click", ()=>{
 
   sessionStorage.setItem("minAge", minAge);
   sessionStorage.setItem("maxAge", maxAge);
-
+  sessionStorage.setItem("currentCard", 0)
   addSavedFilter();
 });
 
