@@ -175,7 +175,7 @@ export async function showRandomUser(userList) {
   matchCity.textContent=`${user.location.city}, ${user.location.state}, ${user.location.country}`;
 
   const likeBtn = createLikeBtn(user);
-  const dislikeBtn = createDislikeBtn(user)
+  const dislikeBtn = createDislikeBtn(userList);
 
   cardDiv.append(profilePic, matchName, matchGender, matchAge, matchCity, likeBtn, dislikeBtn);
   matchContainer.appendChild(cardDiv);
@@ -193,13 +193,13 @@ function createLikeBtn(user){
   return btn;
 }
 
-function createDislikeBtn(user){
+function createDislikeBtn(userList){
   const disBtn = document.createElement("button");
   disBtn.classList.add("dislike-btn");
   disBtn.textContent="No 💔";
 
   disBtn.addEventListener("click", ()=>{
-    nextCard(user)
+    nextCard(userList)
   });
   return disBtn;
 }
