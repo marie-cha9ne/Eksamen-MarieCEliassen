@@ -99,3 +99,74 @@
 .dislike-btn:hover{
   box-shadow: 1px 1px 5px rgb(220, 18, 18);
 }
+
+#gen-btn-container{
+  margin:10px;
+  display: flex;
+  justify-content: space-around;
+}
+
+#filter-females, #filter-all, #filter-males, #add-btn, .unmatch-btn{
+  background-color:transparent;
+  padding: 3px 8px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+#filter-females{
+  border: 3px solid pink;
+}
+#filter-females:hover{
+  box-shadow: 1px 1px 6px pink;
+  cursor: pointer;
+}
+
+#filter-all{
+  border: 3px solid rgb(124, 2, 195);
+}
+#filter-all:hover{
+  box-shadow: 1px 1px 6px rgb(124, 2, 195);
+  cursor: pointer;
+}
+
+#filter-males{
+   border: 3px solid darkblue;
+}
+#filter-males:hover{
+  box-shadow: 1px 1px 6px darkblue;
+  cursor: pointer;
+}
+
+#age-filter-container{
+  margin:15px;
+}
+
+#add-btn{
+  border: 2px solid rgb(76, 168, 88);
+  color:rgb(43, 88, 49);
+}
+#add-btn:hover{
+  box-shadow: 1px 1px 6px rgb(76, 168, 88);
+  cursor: pointer;
+}
+
+#saved-matches{
+  display: flex;
+  justify-content: center;
+  margin:15px 0;
+}
+.unmatch-btn{
+  margin: 10px 0;
+  border: 2px solid rgb(120, 13, 13);
+  color:rgb(116, 15, 15);
+}
+.unmatch-btn:hover{
+  box-shadow: 1px 1px 6px rgb(116, 15, 15);
+  cursor: pointer;
+}
+
+.liked-match-txt{
+  color:rgb(141, 57, 71);
+  margin:15px 0;
+  text-shadow: 1px 1px 5px rgb(231, 82, 107);
+}
