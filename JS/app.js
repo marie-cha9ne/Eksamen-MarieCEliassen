@@ -1,5 +1,6 @@
 import { updateUserEdits } from "../Response/PUT.js";
 import { allUsers, getRandomUsers } from "../Response/GET-matches.js";
+import { postMatch } from "../Response/POST-matches.js";
 
 const userInfo = document.getElementById("user-info");
 
@@ -155,7 +156,7 @@ export async function showRandomUser(userList) {
   const profilePic = document.createElement("img");
   profilePic.src = `${user.picture.medium}`;
 
-  const matchName = document.createElement("h2");
+  const matchName = document.createElement("h3");
   matchName.textContent = `${user.name.first} ${user.name.last}`;
 
   const matchGender = document.createElement("p");
@@ -173,31 +174,32 @@ export async function showRandomUser(userList) {
   const matchCity = document.createElement("p");
   matchCity.textContent=`${user.location.city}, ${user.location.state}, ${user.location.country}`;
 
-  const likeBtn = createLikeBtn(userList, matchContainer);
-  const dislikeBtn = createDislikeBtn(userList, matchContainer)
+  const likeBtn = createLikeBtn(user);
+  const dislikeBtn = createDislikeBtn(user)
 
   cardDiv.append(profilePic, matchName, matchGender, matchAge, matchCity, likeBtn, dislikeBtn);
   matchContainer.appendChild(cardDiv);
 }
 
-function createLikeBtn(userList){
+function createLikeBtn(user){
   const btn = document.createElement("button");
   btn.classList.add("like-btn");
   btn.textContent="Yes ❤️";
 
-  btn.addEventListener("click", ()=>{
-    nextCard(userList);
+  btn.addEventListener("click", async function(){
+    console.log("Post user:", user)
+   await postMatch(user);
   });
   return btn;
 }
 
-function createDislikeBtn(userList){
+function createDislikeBtn(user){
   const disBtn = document.createElement("button");
   disBtn.classList.add("dislike-btn");
   disBtn.textContent="No 💔";
 
   disBtn.addEventListener("click", ()=>{
-    nextCard(userList)
+    nextCard(user)
   });
   return disBtn;
 }
@@ -294,4 +296,40 @@ export function updateAgeFilterInStorage(){
   if(maxAge){
     document.getElementById("max-age").value = maxAge;
   }
+}
+
+// Lag unMatchBtn funksjon her og kall på den inni forEach
+
+export function displaySavedMatch(users){
+const savedMatchDiv = document.getElementById("saved-matches");
+savedMatchDiv.innerHTML="";
+
+users.forEach((user)=>{
+  const cardDiv = document.createElement("div");
+
+  const profilePic = document.createElement("img");
+  profilePic.src = `${user.picture.medium}`;
+
+  const matchName = document.createElement("h3");
+  matchName.textContent = `${user.name.first} ${user.name.last}`;
+
+  const matchGender = document.createElement("p");
+  matchGender.textContent = `Gender: ${user.gender}`;
+
+  if(user.gender == "female"){
+    cardDiv.style.border="5px solid pink";
+  }else{
+    cardDiv.style.border="5px solid darkBlue";
+  }
+
+  const matchAge = document.createElement("p");
+  matchAge.textContent = `Age:${user.dob.age}`;
+
+  const matchCity = document.createElement("p");
+  matchCity.textContent=`${user.location.city}, ${user.location.state}, ${user.location.country}`;
+
+  cardDiv.append(profilePic, matchName, matchGender, matchAge, matchCity)
+
+  savedMatchDiv.appendChild(cardDiv);
+});
 }

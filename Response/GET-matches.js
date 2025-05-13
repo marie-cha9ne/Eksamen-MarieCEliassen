@@ -1,5 +1,5 @@
-import { randomUserUrl } from "./Auth.js";
-import { addSavedFilter, updateAgeFilterInStorage } from "../JS/app.js";
+import { randomUserUrl, randomMatchUrl } from "./Auth.js";
+import { addSavedFilter, displaySavedMatch, updateAgeFilterInStorage } from "../JS/app.js";
 
 export let allUsers = []; //legger inn allUser globalt for enklere gjenbruk av data
 
@@ -36,4 +36,18 @@ export async function getRandomUsers(){
   }
 }
 
+
+export async function getMatchFromCrud(){
+  try{
+    const response = await axios.get(randomMatchUrl);
+    const data = response.data;
+
+    console.log("Match loaded from crudcrud", data)
+    // legg til display funksjon her:
+    displaySavedMatch(data)
+  }catch(error){
+    console.error("Error loading match from crudcrud", error);
+  }
+}
+getMatchFromCrud()
 getRandomUsers()
