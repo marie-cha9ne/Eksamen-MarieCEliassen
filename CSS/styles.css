@@ -106,7 +106,7 @@
   justify-content: space-around;
 }
 
-#filter-females, #filter-all, #filter-males, #add-btn, .unmatch-btn{
+#filter-females, #filter-all, #filter-males, #add-btn, .unmatch-btn, .wink-btn{
   background-color:transparent;
   padding: 3px 8px;
   border-radius: 10px;
@@ -171,4 +171,15 @@
   color:rgb(141, 57, 71);
   margin:15px 0;
   text-shadow: 1px 1px 5px rgb(231, 82, 107);
+}
+
+.wink-btn{
+border: 2px solid gold;
+color: goldenrod;
+margin-left:10px;
+}
+
+.wink-btn:hover{
+  box-shadow: 1px 1px 6px gold;
+  cursor: pointer;
 }
