@@ -1,5 +1,5 @@
 import { updateUserEdits } from "../Response/PUT.js";
-import { allUsers, getRandomUsers } from "../Response/GET-matches.js";
+import { allUsers } from "../Response/GET-matches.js";
 import { postMatch } from "../Response/POST-matches.js";
 import { deleteMatch } from "../Response/DELETE.js"
 
