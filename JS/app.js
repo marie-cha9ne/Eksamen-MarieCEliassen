@@ -23,6 +23,21 @@ function showUserInfo() {
 
 showUserInfo();
 
+// Tilleggsfunksjonalitet loggut:
+const logoutBtn = document.getElementById("logout-btn");
+
+logoutBtn.addEventListener("click", ()=>{
+  const currentUser = sessionStorage.getItem("userLoggedin");
+  let userName = "";
+
+  if(currentUser){
+    const user = JSON.parse(currentUser);
+
+    userName = user.name;
+  }
+  sessionStorage.removeItem("userLoggedin");
+})
+
 async function editUserInfo(user) {
   userInfo.innerHTML = "";
 
@@ -32,7 +47,7 @@ async function editUserInfo(user) {
   const nameInput = document.createElement("input");
   nameInput.value = user.name;
 
-  // tilleggsfunksjonalitet?
+  // tilleggsfunksjonalitet bruker informasjon. Mulighet til å legge til alder:
   const ageLabel = document.createElement("label");
   ageLabel.textContent = "Select you age:";
   const ageEdit = document.createElement("select");
@@ -49,6 +64,7 @@ async function editUserInfo(user) {
     ageEdit.value = user.age;
   }
 
+  // tilleggsfunksjonalitet bruker informasjon. Mulighet til å legge til kjønn:
   const genLabel = document.createElement("label");
   genLabel.textContent = "Choose a gender:";
 
@@ -109,20 +125,21 @@ async function editUserInfo(user) {
 function displayUserEdits(user) {
   userInfo.innerHTML = "";
 
-  if (user.gender === "Female") {
-    userInfo.style.border = "5px solid pink";
-  } else if (user.gender === "Male") {
-    userInfo.style.border = "5px solid darkBlue";
-  }
-
   const nameTag = document.createElement("p");
   nameTag.textContent = `Name: ${user.name}`;
 
+   // tilleggsfunksjonalitet bruker informasjon.
   const ageTag = document.createElement("p");
   ageTag.textContent = `Age: ${user.age || ""}`;
 
   const genTag = document.createElement("p");
   genTag.textContent = `Gender: ${user.gender || ""}`;
+
+    if (user.gender === "Female") {
+    userInfo.style.border = "5px solid pink";
+  } else if (user.gender === "Male") {
+    userInfo.style.border = "5px solid darkBlue";
+  }
 
   const editBtn = document.createElement("button");
   editBtn.classList.add("edit-btn");
@@ -147,7 +164,7 @@ function userCardSetup(user){
   const matchName = document.createElement("h3");
   matchName.textContent = `${user.name.first} ${user.name.last}`;
 
-  // Kjønn
+  // Kjønn Tillegg:
   const matchGender = document.createElement("p");
   matchGender.textContent = `Gender: ${user.gender}`;
 
