@@ -209,18 +209,6 @@ function nextCard(userList){
 
   if(currentIndex >= userList.length){
        matchContainer.innerHTML="<p>No more matches Available</p>";
-
-      // lager knapp for å laste nye brukere
-      const loadMoreBtn = document.createElement("button");
-      loadMoreBtn.textContent = "Load more matches";
-
-      loadMoreBtn.addEventListener("click", async ()=>{
-       await getRandomUsers();
-       const newMatces = JSON.parse(sessionStorage.getItem("matches"));
-       sessionStorage.setItem("currentCard", 0);
-       showRandomUser(newMatces);
-      });
-      matchContainer.appendChild(loadMoreBtn);
       return;
   }
   sessionStorage.setItem("currentCard", currentIndex.toString());
@@ -248,7 +236,6 @@ document.getElementById("filter-males").addEventListener("click", ()=>{
   showRandomUser(filteredMa);
 });
 
-// TillegsFuksjonalitet. tilbake til default -> viser begge kjønn
 document.getElementById("filter-all").addEventListener("click", ()=>{
   sessionStorage.removeItem("genderFilter");
    sessionStorage.setItem("currentCard", 0);
@@ -276,7 +263,6 @@ export function addSavedFilter(){
 
   filtered = ageFilter(filtered, minAge, maxAge);
 
-  // sessionStorage.setItem("currentCard", 0);
   showRandomUser(filtered)
 }
 
@@ -291,7 +277,8 @@ document.getElementById("add-btn").addEventListener("click", ()=>{
 
   sessionStorage.setItem("minAge", minAge);
   sessionStorage.setItem("maxAge", maxAge);
-  sessionStorage.setItem("currentCard", 0)
+
+  sessionStorage.setItem("currentCard", 0);
   addSavedFilter();
 });
 

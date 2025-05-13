@@ -15,13 +15,13 @@ export async function getRandomUsers(){
       // lagrer de 50 første brukerne i sessionStorage
       sessionStorage.setItem("matches", JSON.stringify(users));
 
-      sessionStorage.setItem("currentCard", 0);
       // vi bruker disse 50 første brukerne
       allUsers = users;
     }else{
       try{
       // bruk lagrede brukerne fra session
       allUsers = JSON.parse(savedUsers);
+      console.log("Loaded saved users from sessionStorage", allUsers)
       }catch(error){
         console.error("Error parsing sessionStorage data", error);
         allUsers = []; //dersom parsing feiler legges de i et tomt array
@@ -29,7 +29,6 @@ export async function getRandomUsers(){
     }
     console.log("Managed to get from randomuser api", allUsers);
     
-
     updateAgeFilterInStorage()//Oppdaterer inputfelt visuelt på siden.
     addSavedFilter() //Viser karakterkort og filtrerer etter ønsket visning
   }catch(error){

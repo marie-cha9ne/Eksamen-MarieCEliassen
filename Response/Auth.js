@@ -1,8 +1,7 @@
-//Legg ved pages og batchsize for å kontrollere antall visninger i url i variabler se GIT ??
 
-// legger inn results=20 for å ikke overbelaste crudcrud for fort
-export const randomUserUrl =`https://randomuser.me/api/?results=50`;
+// Lagt inn 100 random users, dersom det er unødvendig senk tilbake til 50 
+export const randomUserUrl =`https://randomuser.me/api/?results=100`;
 
-const crudKey = "e8ec7c3a99d24bc2ba010a7a2f14fd9f";
+const crudKey = "33c977895ec642669ffe3d1e72416fab";
 export const crudCrudUrl=`https://crudcrud.com/api/${crudKey}/users`;
 export const randomMatchUrl=`https://crudcrud.com/api/${crudKey}/matches`;
