@@ -1,6 +1,7 @@
 import { updateUserEdits } from "../Response/PUT.js";
 import { allUsers, getRandomUsers } from "../Response/GET-matches.js";
 import { postMatch } from "../Response/POST-matches.js";
+import { deleteMatch } from "../Response/DELETE.js"
 
 const userInfo = document.getElementById("user-info");
 
@@ -298,7 +299,17 @@ export function updateAgeFilterInStorage(){
   }
 }
 
-// Lag unMatchBtn funksjon her og kall på den inni forEach
+function unMatcUser(userId){
+ const unMatch = document.createElement("button");
+  unMatch.textContent = "Unmatch 🥀";
+  unMatch.classList.add("unmatch-btn");
+
+  unMatch.addEventListener("click", ()=>{
+    console.log("Deleting match:", userId);
+    deleteMatch(userId);
+  });
+  return unMatch;
+}
 
 export function displaySavedMatch(users){
 const savedMatchDiv = document.getElementById("saved-matches");
@@ -328,7 +339,9 @@ users.forEach((user)=>{
   const matchCity = document.createElement("p");
   matchCity.textContent=`${user.location.city}, ${user.location.state}, ${user.location.country}`;
 
-  cardDiv.append(profilePic, matchName, matchGender, matchAge, matchCity)
+  const UnmatchBtn = unMatcUser(user._id)
+
+  cardDiv.append(profilePic, matchName, matchGender, matchAge, matchCity, UnmatchBtn)
 
   savedMatchDiv.appendChild(cardDiv);
 });
