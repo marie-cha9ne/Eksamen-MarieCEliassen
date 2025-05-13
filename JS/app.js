@@ -28,7 +28,6 @@ const logoutBtn = document.getElementById("logout-btn");
 
 logoutBtn.addEventListener("click", ()=>{
   const currentUser = sessionStorage.getItem("userLoggedin");
-  let userName = "";
 
   if(currentUser){
     const user = JSON.parse(currentUser);
@@ -350,8 +349,42 @@ users.forEach((user)=>{
   
   const UnmatchBtn = unMatcUser(user._id)
 
-  cardDiv.append(UnmatchBtn);
+  const winkBtn = createWinkBtn(user);
+
+  cardDiv.append(UnmatchBtn, winkBtn);
 
   savedMatchDiv.appendChild(cardDiv);
 });
 }
+
+// Tilleggsfunksjonalitet "Wink":
+
+const comments = [
+  "What a beautiful name you have, {name} 😍",
+  "Thanks for the wink {name} 😉",
+  "Do you come to this page often?😏",
+  "Do you like StarWars? Because Yoda one for me!",
+  "Wink wink, heres a rose just for you {name}🌹", 
+  "You seem friendly!",
+  "Well here I am, what are your other two wishes?😉",
+  "Hope you have a nice day!"
+];
+
+function createWinkBtn(user){
+  const winkBtn = document.createElement("button");
+  winkBtn.classList.add("wink-btn");
+  winkBtn.textContent="Send a wink😉";
+
+  winkBtn.addEventListener("click", ()=>{
+    const currentUser = JSON.parse(sessionStorage.getItem("userLoggedin") || "{}");
+    const currentUserName = currentUser.name;
+    const text = comments[
+      Math.floor(Math.random() * comments.length)
+    ];
+    
+    const message = text.replace("{name}", currentUserName);
+
+    alert(message);
+  });
+  return winkBtn;
+};
