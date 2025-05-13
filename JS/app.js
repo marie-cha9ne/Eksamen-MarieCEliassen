@@ -186,19 +186,21 @@ export async function showRandomUser(userList) {
 
 
   const cardDiv = userCardSetup(user)
-  const likeBtn = createLikeBtn(user);
+  const likeBtn = createLikeBtn(user, userList);
   const dislikeBtn = createDislikeBtn(userList);
 
   cardDiv.append(likeBtn, dislikeBtn);
   matchContainer.appendChild(cardDiv);
 }
 
-function createLikeBtn(user){
+function createLikeBtn(user, userList){
   const btn = document.createElement("button");
   btn.classList.add("like-btn");
   btn.textContent="Yes ❤️";
 
   btn.addEventListener("click", async function(){
+    nextCard(userList)
+
     console.log("Post user:", user)
    await postMatch(user);
   });
