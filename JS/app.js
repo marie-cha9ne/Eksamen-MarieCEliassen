@@ -135,7 +135,40 @@ function displayUserEdits(user) {
   userInfo.append(nameTag, ageTag, genTag, editBtn);
 }
 
+function userCardSetup(user){
+  const cardDiv = document.createElement("div");
+  cardDiv.classList.add("card-div");
 
+  // Profilbilde
+  const profilePic = document.createElement("img");
+  profilePic.src = `${user.picture.medium}`;
+
+  // Navn
+  const matchName = document.createElement("h3");
+  matchName.textContent = `${user.name.first} ${user.name.last}`;
+
+  // Kjønn
+  const matchGender = document.createElement("p");
+  matchGender.textContent = `Gender: ${user.gender}`;
+
+  if(user.gender == "female"){
+    cardDiv.style.border="5px solid pink";
+  }else{
+    cardDiv.style.border="5px solid darkBlue";
+  }
+
+  // Alder
+  const matchAge = document.createElement("p");
+  matchAge.textContent = `Age:${user.dob.age}`;
+
+  // Bosted
+  const matchCity = document.createElement("p");
+  matchCity.textContent=`${user.location.city}, ${user.location.state}, ${user.location.country}`;
+
+  cardDiv.append(profilePic, matchName, matchGender, matchAge, matchCity);
+
+  return cardDiv;
+}
 
 export async function showRandomUser(userList) {
   const matchContainer = document.getElementById("match-container");
@@ -151,34 +184,12 @@ export async function showRandomUser(userList) {
 
   let user = userList[currentIndex];
 
-  const cardDiv = document.createElement("div");
-  cardDiv.classList.add("card-div");
 
-  const profilePic = document.createElement("img");
-  profilePic.src = `${user.picture.medium}`;
-
-  const matchName = document.createElement("h3");
-  matchName.textContent = `${user.name.first} ${user.name.last}`;
-
-  const matchGender = document.createElement("p");
-  matchGender.textContent = `Gender: ${user.gender}`;
-
-  if(user.gender == "female"){
-    cardDiv.style.border="5px solid pink";
-  }else{
-    cardDiv.style.border="5px solid darkBlue";
-  }
-
-  const matchAge = document.createElement("p");
-  matchAge.textContent = `Age:${user.dob.age}`;
-
-  const matchCity = document.createElement("p");
-  matchCity.textContent=`${user.location.city}, ${user.location.state}, ${user.location.country}`;
-
+  const cardDiv = userCardSetup(user)
   const likeBtn = createLikeBtn(user);
   const dislikeBtn = createDislikeBtn(userList);
 
-  cardDiv.append(profilePic, matchName, matchGender, matchAge, matchCity, likeBtn, dislikeBtn);
+  cardDiv.append(likeBtn, dislikeBtn);
   matchContainer.appendChild(cardDiv);
 }
 
@@ -316,32 +327,11 @@ const savedMatchDiv = document.getElementById("saved-matches");
 savedMatchDiv.innerHTML="";
 
 users.forEach((user)=>{
-  const cardDiv = document.createElement("div");
-
-  const profilePic = document.createElement("img");
-  profilePic.src = `${user.picture.medium}`;
-
-  const matchName = document.createElement("h3");
-  matchName.textContent = `${user.name.first} ${user.name.last}`;
-
-  const matchGender = document.createElement("p");
-  matchGender.textContent = `Gender: ${user.gender}`;
-
-  if(user.gender == "female"){
-    cardDiv.style.border="5px solid pink";
-  }else{
-    cardDiv.style.border="5px solid darkBlue";
-  }
-
-  const matchAge = document.createElement("p");
-  matchAge.textContent = `Age:${user.dob.age}`;
-
-  const matchCity = document.createElement("p");
-  matchCity.textContent=`${user.location.city}, ${user.location.state}, ${user.location.country}`;
-
+  const cardDiv = userCardSetup(user);
+  
   const UnmatchBtn = unMatcUser(user._id)
 
-  cardDiv.append(profilePic, matchName, matchGender, matchAge, matchCity, UnmatchBtn)
+  cardDiv.append(UnmatchBtn);
 
   savedMatchDiv.appendChild(cardDiv);
 });
