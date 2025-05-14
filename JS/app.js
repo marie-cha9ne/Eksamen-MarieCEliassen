@@ -25,7 +25,7 @@ showUserInfo();
 
 // Tilleggsfunksjonalitet loggut:
 const logoutBtn = document.getElementById("logout-btn");
-
+if(logoutBtn){
 logoutBtn.addEventListener("click", ()=>{
   const currentUser = sessionStorage.getItem("userLoggedin");
 
@@ -35,7 +35,9 @@ logoutBtn.addEventListener("click", ()=>{
     userName = user.name;
   }
   sessionStorage.removeItem("userLoggedin");
-})
+});
+}
+
 
 async function editUserInfo(user) {
   userInfo.innerHTML = "";
@@ -252,28 +254,39 @@ function genderFilter(users, gender){
   return users.filter(user => user.gender === gender);
 }
 
-document.getElementById("filter-females").addEventListener("click", ()=> {
+const filterFemalesBtn = document.getElementById("filter-females")
+
+if(filterFemalesBtn){
+filterFemalesBtn.addEventListener("click", ()=> {
   const filteredFe = genderFilter(allUsers, "female");
   sessionStorage.setItem("genderFilter", "female");
   sessionStorage.setItem("currentCard", 0);
 
   showRandomUser(filteredFe);
 });
+};
 
-document.getElementById("filter-males").addEventListener("click", ()=>{
+const filterMalesBtn = document.getElementById("filter-males");
+
+if(filterMalesBtn){
+filterMalesBtn.addEventListener("click", ()=>{
   const filteredMa = genderFilter(allUsers, "male");
   sessionStorage.setItem("genderFilter", "male");
    sessionStorage.setItem("currentCard", 0);
 
   showRandomUser(filteredMa);
 });
+};
 
-document.getElementById("filter-all").addEventListener("click", ()=>{
+const filterAllBtn = document.getElementById("filter-all")
+if(filterAllBtn){
+filterAllBtn.addEventListener("click", ()=>{
   sessionStorage.removeItem("genderFilter");
    sessionStorage.setItem("currentCard", 0);
 
   showRandomUser(allUsers);
 });
+};
 
 function ageFilter(users, minAge, maxAge){
   return users.filter(user => {
@@ -298,7 +311,10 @@ export function addSavedFilter(){
   showRandomUser(filtered)
 }
 
-document.getElementById("add-btn").addEventListener("click", ()=>{
+const addBtn = document.getElementById("add-btn");
+
+if(addBtn){
+addBtn.addEventListener("click", ()=>{
   const minAge = parseInt(document.getElementById("min-age").value);
   const maxAge = parseInt(document.getElementById("max-age").value);
 
@@ -313,6 +329,7 @@ document.getElementById("add-btn").addEventListener("click", ()=>{
   sessionStorage.setItem("currentCard", 0);
   addSavedFilter();
 });
+};
 
 // funksjon for å vise lagrede filtrerings valg fra sessionStorage i inputfeltene på siden.
 export function updateAgeFilterInStorage(){
@@ -388,3 +405,5 @@ function createWinkBtn(user){
   });
   return winkBtn;
 };
+
+export {genderFilter, ageFilter, nextCard}

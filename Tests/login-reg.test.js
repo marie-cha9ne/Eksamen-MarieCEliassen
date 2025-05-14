@@ -3,7 +3,6 @@
 */
 
 import { beforeEach, describe, expect, jest } from '@jest/globals';
-import { getUsers } from '../Response/GET-users';
 
 // TESTER REGISTRERING SIDE 1:
 describe("register.js - validering", ()=>{
