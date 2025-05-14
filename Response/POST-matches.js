@@ -7,7 +7,6 @@ try{
   const data =  response.data;
 
   console.log("Match posted to crudcrud", data);
-  // kall på get request her:
   getMatchFromCrud()
 }catch(error){
   console.error("Error posting match to crudcrud", error);

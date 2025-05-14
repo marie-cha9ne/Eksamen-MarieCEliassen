@@ -1,40 +1,41 @@
 /**
  * @jest-environment jsdom
  */
- 
+
 import { expect } from "@jest/globals";
-import { ageFilter, genderFilter, unMatcUser, userCardSetup} from "../JS/app.js";
+import {
+  ageFilter,
+  genderFilter,
+  unMatcUser,
+  userCardSetup,
+} from "../JS/app.js";
 
+describe("funksjoner i app.js", () => {
+  test("testen sjekker om genderFilter returnerer brukere med riktig kjønn", () => {
+    const matches = [
+      { name: "Clara", gender: "female" },
+      { name: "John", gender: "male" },
+      { name: "Stella", gender: "female" },
+    ];
+    const result = genderFilter(matches, "female");
 
-describe("funksjoner i app.js", ()=>{
-test("testen sjekker om genderFilter returnerer brukere med riktig kjønn", ()=>{
+    expect(result).toEqual([
+      { name: "Clara", gender: "female" },
+      { name: "Stella", gender: "female" },
+    ]);
+  });
 
-  const matches = [
-    {name: "Clara", gender: "female"},
-    {name: "John", gender: "male"},
-    {name: "Stella", gender:"female"}
-  ];
-  const result = genderFilter(matches, "female");
- 
-  expect(result).toEqual([
-    {name:"Clara", gender: "female"},
-    {name:"Stella", gender:"female"}
-  ]);
+  test("Testen sjekker at ageFilter returnerer brukere mellom 25 og 35", () => {
+    const users = [
+      { dob: { age: 50 } },
+      { dob: { age: 30 } },
+      { dob: { age: 20 } },
+    ];
+    expect(ageFilter(users, 25, 35)).toEqual([{ dob: { age: 30 } }]);
+  });
 });
 
-test("Testen sjekker at ageFilter returnerer brukere mellom 25 og 35", ()=>{
-  const users = [
-    {dob: {age: 50}},
-    {dob: {age: 30}},
-    {dob: {age: 20}}
-  ];
-  expect(ageFilter(users, 25, 35)).toEqual([
-    {dob: {age: 30}}
-  ]);
-});
-});
-
-test("unMatchUser lager en knapp med riktig tekst og klasse", ()=>{
+test("unMatchUser lager en knapp med riktig tekst og klasse", () => {
   const btn = unMatcUser("fakeId");
 
   expect(btn.tagName).toBe("BUTTON");
@@ -42,13 +43,13 @@ test("unMatchUser lager en knapp med riktig tekst og klasse", ()=>{
   expect(btn.classList.contains("unmatch-btn")).toBe(true);
 });
 
-test("testen sjekker at userCardSetup lager kort med riktig innhold", ()=>{
+test("testen sjekker at userCardSetup lager kort med riktig innhold", () => {
   const fakeUser = {
-    picture: {medium: "https://fake.image"},
-    name: {first: "Clara", last:"Klok"},
+    picture: { medium: "https://fake.image" },
+    name: { first: "Clara", last: "Klok" },
     gender: "female",
-    dob: {age: 28}, 
-    location: {city: "Oslo", state: "Oslo", country:"Norway"}
+    dob: { age: 28 },
+    location: { city: "Oslo", state: "Oslo", country: "Norway" },
   };
 
   const card = userCardSetup(fakeUser);

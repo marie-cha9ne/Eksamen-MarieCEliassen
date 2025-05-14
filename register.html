@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>New user register</title>
-  <link rel="stylesheet" href="./CSS/reg.css">
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</head>
-<body>
-  <div id="form-parent">
-    <form id="reg-form">
-      <h2 id="reg-title">Cupids Register</h2>
-      <p id="info-reg-txt">Create a user name and password:</p>
-      <label for="user-name" id="label-name">User name:</label>
-      <input type="text" id="user-name">
-      <label for="password" id="passwrd-label">Password:</label>
-      <input type="password" id="password">
-      <div id="btn-container">
-      <button type="submit" id="create-btn">Create account</button>
-      <button class="login-btn"><a href="./login.html" id="login-link">Login</a></button>
-      </div>
-    </form>
-   </div>
-  <script type="module" src="./JS/register.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New user register</title>
+    <link rel="stylesheet" href="./CSS/reg.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="form-parent">
+      <form id="reg-form">
+        <h2 id="reg-title">Cupids Register</h2>
+        <p id="info-reg-txt">Create a user name and password:</p>
+        <label for="user-name" id="label-name">User name:</label>
+        <input type="text" id="user-name" />
+        <label for="password" id="passwrd-label">Password:</label>
+        <input type="password" id="password" />
+        <div id="btn-container">
+          <button type="submit" id="create-btn">Create account</button>
+          <button class="login-btn">
+            <a href="./login.html" id="login-link">Login</a>
+          </button>
+        </div>
+      </form>
+    </div>
+    <script type="module" src="./JS/register.js"></script>
+  </body>
 </html>

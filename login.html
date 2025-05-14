@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User login</title>
-  <link rel="stylesheet" href="./CSS/login.css">
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</head>
-<body>
-   <div id="form-parent">
-    <form id="login-form">
-      <h2 id="log-title">Cupids Login</h2>
-      <p id="info-txt"></p>
-      <label for="user-name" class="name-label">User name:</label>
-      <input type="text" id="user-name" required>
-      <label for="password" class="passwrd-label">Password:</label>
-      <input type="password" id="password" required>
-      <button type="submit" id="login-btn">Login</button>
-      <p class="reg-p">Don't have an account? <a href="./register.html" id="link">Register</a></p>
-    </form>
-   </div>
-  <script type="module" src="./JS/login.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User login</title>
+    <link rel="stylesheet" href="./CSS/login.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="form-parent">
+      <form id="login-form">
+        <h2 id="log-title">Cupids Login</h2>
+        <p id="info-txt"></p>
+        <label for="user-name" class="name-label">User name:</label>
+        <input type="text" id="user-name" required />
+        <label for="password" class="passwrd-label">Password:</label>
+        <input type="password" id="password" required />
+        <button type="submit" id="login-btn">Login</button>
+        <p class="reg-p">
+          Don't have an account?
+          <a href="./register.html" id="link">Register</a>
+        </p>
+      </form>
+    </div>
+    <script type="module" src="./JS/login.js"></script>
+  </body>
 </html>
