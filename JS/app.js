@@ -406,4 +406,4 @@ function createWinkBtn(user){
   return winkBtn;
 };
 
-export {genderFilter, ageFilter, nextCard}
+export {genderFilter, ageFilter, unMatcUser, userCardSetup}
