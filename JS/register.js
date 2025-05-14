@@ -6,7 +6,7 @@ const infoRegTxt = document.getElementById("info-reg-txt");
 const userNameInput = document.getElementById("user-name");
 const passwordInput = document.getElementById("password");
 
-async function regNewUser(){
+export async function regNewUser(){
   const usrName = userNameInput.value;
   const passwrd = passwordInput.value;
 
