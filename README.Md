@@ -20,10 +20,10 @@ Dette prosjektet er min besvarelse på eksamen i "Javascript Api". Dette er en e
 - Dersom ingen matcher finnes etter filtrering vises melding
 
 ## Kilder brukt:
-- Jest documentation: resetModules (for ESM + dynamic imports)
-https://jestjs.io/docs/jest-object#jestresetmodules
+- Jest documentation: Gettin started
+https://jestjs.io/docs/getting-started
 
--MDN Web Docs: Promise.resolve (for async testing)
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve
+-MDN Web Docs: isNaN (for if sjekk)
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN
 
 - Veileding fra ChatGPT (Generativ AI) for hjelp av syntax og debugging.
