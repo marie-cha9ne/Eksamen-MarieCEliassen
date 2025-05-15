@@ -397,6 +397,4 @@ function createWinkBtn() {
     alert(message);
   });
   return winkBtn;
-}
-
-export { genderFilter, ageFilter, unMatcUser, userCardSetup };
+};
