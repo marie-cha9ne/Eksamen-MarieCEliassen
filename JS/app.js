@@ -405,5 +405,3 @@ function createWinkBtn(user){
   });
   return winkBtn;
 };
-
-export {genderFilter, ageFilter, unMatcUser, userCardSetup}

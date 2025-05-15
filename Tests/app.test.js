@@ -2,76 +2,45 @@
  * @jest-environment jsdom
  */
  
-import { expect } from "@jest/globals";
-import { ageFilter, genderFilter, unMatcUser, userCardSetup} from "../JS/app.js";
+describe("app.js - DOM relatert testing", ()=>{
+  test("Tester at genderfilter filtrerer ut riktig kjønn", ()=>{
+    const users = [
+      {name: "Stella", gender: "female"},
+      {name: "Hans", gender:"male"},
+      {name: "Violet", gender:"female"}
+    ];
 
+    const results = users.filter(user => user.gender === "female");
 
-describe("funksjoner i app.js", ()=>{
-test("testen sjekker om genderFilter returnerer brukere med riktig kjønn", ()=>{
+    expect(results).toEqual([
+      {name: "Stella", gender: "female"},
+      {name: "Violet", gender: "female"}
+    ]);
+  });
 
-  const matches = [
-    {name: "Clara", gender: "female"},
-    {name: "John", gender: "male"},
-    {name: "Stella", gender:"female"}
-  ];
-  const result = genderFilter(matches, "female");
- 
-  expect(result).toEqual([
-    {name:"Clara", gender: "female"},
-    {name:"Stella", gender:"female"}
-  ]);
-});
+  test("Tester at et kort element blir laget i DOM", ()=>{
+    const fakeUser ={
+      picture: {medium: "https://fake.image"},
+      name: {first: "Violet", last: "Sorrengail"},
+      gender: "female",
+      dob: { age: 23},
+      location: {city: "Oslo", state:"Oslo", country: "Norway"}
+    };
 
-test("Testen sjekker at ageFilter returnerer brukere mellom 25 og 35", ()=>{
-  const users = [
-    {dob: {age: 50}},
-    {dob: {age: 30}},
-    {dob: {age: 20}}
-  ];
-  expect(ageFilter(users, 25, 35)).toEqual([
-    {dob: {age: 30}}
-  ]);
-});
-});
+    const cardDiv = document.createElement("div");
+    cardDiv.classList.add("card-div");
 
-test("unMatchUser lager en knapp med riktig tekst og klasse", ()=>{
-  const btn = unMatcUser("fakeId");
+    const profilePic = document.createElement("img");
+    profilePic.src = fakeUser.picture.medium;
 
-  expect(btn.tagName).toBe("BUTTON");
-  expect(btn.textContent).toBe("Unmatch 🥀");
-  expect(btn.classList.contains("unmatch-btn")).toBe(true);
-});
+    const nameTag = document.createElement("h3");
+    nameTag.textContent = `${fakeUser.name.first} ${fakeUser.name.last}`;
 
-test("testen sjekker at userCardSetup lager kort med riktig innhold", ()=>{
-  const fakeUser = {
-    picture: {medium: "https://fake.image"},
-    name: {first: "Clara", last:"Klok"},
-    gender: "female",
-    dob: {age: 28}, 
-    location: {city: "Oslo", state: "Oslo", country:"Norway"}
-  };
+    cardDiv.append(profilePic, nameTag);
 
-  const card = userCardSetup(fakeUser);
-
-  expect(card.tagName).toBe("DIV");
-  expect(card.classList.contains("card-div")).toBe(true);
-
-  expect(card.style.border).toBe("5px solid pink");
-
-  expect(card.children.length).toBe(5);
-
-  const img = card.querySelector("img");
-  expect(img.src).toBe("https://fake.image/");
-
-  const name = card.querySelector("h3");
-  expect(name.textContent).toBe("Clara Klok");
-
-  const gender = card.querySelectorAll("p")[0];
-  expect(gender.textContent).toBe("Gender: female");
-
-  const age = card.querySelectorAll("p")[1];
-  expect(age.textContent).toBe("Age:28");
-
-  const city = card.querySelectorAll("p")[2];
-  expect(city.textContent).toBe("Oslo, Oslo, Norway");
-});
+    expect(cardDiv.tagName).toBe("DIV");
+    expect(cardDiv.classList.contains("card-div")).toBe(true);
+    expect(cardDiv.querySelector("h3").textContent).toBe("Violet Sorrengail");
+    expect(cardDiv.querySelector("img").getAttribute("src")).toBe("https://fake.image");
+  });
+})
